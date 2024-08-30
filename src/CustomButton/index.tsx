@@ -1,62 +1,120 @@
 import { TypographyProps, useTheme } from "@mui/material";
+import Box from "@mui/material/Box";
 import Button, { ButtonProps } from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import CustomIcon from "./CustomIcon";
 
 interface CustomizedButtonProps extends ButtonProps {
     variant: ButtonProps["variant"];
     colorStyle?: string;
+    isLoading?: boolean;
 }
 
 const CustomizedButton = styled(Button, {
     shouldForwardProp: (prop: string) => prop !== "colorStyle",
-})(({ colorStyle }: CustomizedButtonProps) => {
+})(({ colorStyle, isLoading }: CustomizedButtonProps) => {
     const theme = useTheme();
     const palette = theme.palette;
     const selectedColorPalette = colorStyle
         ? palette[colorStyle as keyof typeof palette]
         : undefined;
     const colorDetails = selectedColorPalette as { [key: string]: string };
+    const isGrey = colorStyle === "grey";
+    const disabledOutlinedColor = isGrey
+        ? `${colorDetails["400"]}`
+        : `${colorDetails["300"]}`;
+    const loadingOutlinedBackgroundColor = isGrey
+        ? `${colorDetails["200"]}`
+        : `${colorDetails["100"]}`;
+    const loadingOutlinedBorderColor = isGrey
+        ? `${colorDetails["500"]}`
+        : `${colorDetails["700"]}`;
+    const loadingContainedColor = isGrey
+        ? `${colorDetails["700"]}`
+        : `${colorDetails["800"]}`;
 
     return {
         "&.MuiButton-text": {
-            color: `${colorDetails["900"]}`,
-            backgroundColor: `${colorDetails["300"]}`,
+            color: `${colorDetails["700"]}`,
+            borderColor: "none",
+            "&:hover": {
+                outline: "none",
+                backgroundColor: `${colorDetails["100"]}`,
+                transition: "background-color 200ms ease-out",
+            },
+            "&:active": {
+                outline: "none",
+                backgroundColor: `${colorDetails["100"]}`,
+            },
             "&:focus": {
                 outline: "none",
-                border: `1px solid ${colorDetails["900"]}`,
             },
-            "& .MuiSvgIcon-root": {
-                // fontSize: "inherit",
-                color: `${colorDetails["900"]}`,
+            "&:disabled": {
+                color: `${palette.grey["300"]}`,
             },
         },
 
         "&.MuiButton-outlined": {
-            backgroundColor: `${colorDetails["400"]}`,
+            color: `${colorDetails["700"]}`,
+            borderColor: isGrey
+                ? `${colorDetails["500"]}`
+                : `${colorDetails["700"]}`,
+            "&:hover": {
+                outline: "none",
+                backgroundColor: isGrey
+                    ? `${colorDetails["200"]}`
+                    : `${colorDetails["100"]}`,
+                transition: "background-color 200ms ease-out",
+            },
+            "&:active": {
+                outline: "none",
+                backgroundColor: isGrey
+                    ? `${colorDetails["200"]}`
+                    : `${colorDetails["100"]}`,
+            },
+            "&:focus": {
+                outline: "none",
+            },
+            "&:disabled": {
+                color: isLoading
+                    ? `${colorDetails["700"]}`
+                    : disabledOutlinedColor,
+                backgroundColor: isLoading && loadingOutlinedBackgroundColor,
+                borderColor: isLoading
+                    ? loadingOutlinedBorderColor
+                    : `${colorDetails["300"]}`,
+            },
         },
 
         "&.MuiButton-contained": {
-            backgroundColor: `${colorDetails["400"]}`,
+            color: isGrey ? `${colorDetails["900"]}` : `${palette.grey["50"]}`,
+            backgroundColor: isGrey
+                ? `${colorDetails["300"]}`
+                : `${colorDetails["700"]}`,
             "&:hover": {
-                backgroundColor: `${colorDetails["50"]}`,
-                borderColor: `${colorDetails["200"]}`,
+                outline: "none",
+                backgroundColor: isGrey
+                    ? `${colorDetails["400"]}`
+                    : `${colorDetails["600"]}`,
+                transition: "background-color 200ms ease-out",
             },
             "&:active": {
-                backgroundColor: `${colorDetails["200"]}`,
-                borderColor: `${colorDetails["200"]}`,
+                outline: "none",
+                backgroundColor: isGrey
+                    ? `${colorDetails["500"]}`
+                    : `${colorDetails["700"]}`,
             },
             "&:focus": {
-                borderColor: `${colorDetails["900"]}`,
-                boxShadow: `0 0 0 3px ${colorDetails["200"]}`,
                 outline: "none",
             },
-            "&.Mui-disabled": {
-                backgroundColor: `${colorDetails["200"]}`,
-                color: `${colorDetails["800"]}`,
-                borderColor: `${colorDetails["300"]}`,
+            "&:disabled": {
+                color: isLoading
+                    ? loadingContainedColor
+                    : `${palette.grey["50"]}`,
+                backgroundColor: isGrey
+                    ? `${colorDetails["300"]}`
+                    : `${colorDetails["200"]}`,
             },
         },
     };
@@ -67,31 +125,50 @@ function CustomBtton({
     text,
     textStyle,
     colorStyle,
+    backgroundColor,
     borderRadius,
     shadow,
+    gap,
     startIcon,
     startIconSize,
     endIcon,
     endIconSize,
     disabled,
-    loading,
+    isLoading,
     loadingIconSize,
 }: {
     variant: ButtonProps["variant"];
     text?: string;
     textStyle: TypographyProps["variant"];
     colorStyle?: string;
+    backgroundColor?: string;
     borderRadius?: string;
     shadow?: number;
-    startIcon?: string | null;
+    gap?: string;
+    startIcon?: string;
     startIconSize?: number;
-    endIcon?: React.ReactNode;
+    endIcon?: string;
     endIconSize?: number;
     disabled?: boolean;
-    loading?: boolean;
+    isLoading?: boolean;
     loadingIconSize?: number;
 }) {
     const theme = useTheme();
+
+    const CustomIcon = (icon?: string, iconSize?: number) => {
+        return (
+            <>
+                <Box
+                    component="img"
+                    sx={{
+                        width: iconSize,
+                        height: iconSize,
+                    }}
+                    src={icon}
+                />
+            </>
+        );
+    };
 
     return (
         <CustomizedButton
@@ -100,44 +177,38 @@ function CustomBtton({
             disableElevation={true}
             variant={variant}
             colorStyle={colorStyle}
-            startIcon={
-                loading ? null : (
-                    <CustomIcon src={startIcon} iconSize={startIconSize} />
-                )
-                //   startIcon && (
-                //       <Box
-                //           component="img"
-                //           sx={{
-                //               color: "red",
-                //               height: { startIconSize },
-                //               width: { startIconSize },
-                //           }}
-                //           src={startIcon}
-                //       />
-                //   )
-            }
-            endIcon={loading ? null : endIcon}
-            disabled={disabled}
+            startIcon={isLoading ? null : CustomIcon(startIcon, startIconSize)}
+            endIcon={isLoading ? null : CustomIcon(endIcon, endIconSize)}
+            disabled={isLoading ? true : disabled}
+            isLoading={isLoading}
             sx={{
                 width: "100%",
+                minWidth: "0",
                 height: "100%",
                 textTransform: "none",
-                borderRadius: { borderRadius },
-                boxShadow:
-                    shadow !== undefined ? theme.shadows[shadow] : "none",
-                "& .MuiSvgIcon-root": {
-                    fontSize: "inherit",
+                backgroundColor: backgroundColor,
+                borderRadius: borderRadius,
+                boxShadow: shadow && theme.shadows[shadow],
+                "&:hover": {
+                    boxShadow: shadow && theme.shadows[shadow],
                 },
-                "&.MuiButton-startIcon": {
-                    marginRight: 0,
+                "&:focus": {
+                    boxShadow: shadow && theme.shadows[shadow],
+                },
+                "&:disabled": {
+                    boxShadow: shadow && theme.shadows[shadow],
+                },
+                "& .MuiButton-startIcon": {
+                    marginRight: gap ? gap : 0,
                     marginLeft: 0,
                 },
                 "& .MuiButton-endIcon": {
-                    fontSize: endIconSize,
+                    marginRight: 0,
+                    marginLeft: gap ? gap : 0,
                 },
             }}
         >
-            {loading ? (
+            {isLoading ? (
                 <CircularProgress color="inherit" size={loadingIconSize} />
             ) : (
                 <Typography variant={textStyle}>{text}</Typography>

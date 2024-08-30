@@ -163,7 +163,11 @@ function CompleteButtonRecords({
             }}
         >
             {loading ? (
-                <CircularProgress color="inherit" size={loadingIconSize} />
+                <CircularProgress
+                    color="inherit"
+                    size={loadingIconSize}
+                    thickness={6}
+                />
             ) : (
                 <Typography variant={textStyle}>{text}</Typography>
             )}
