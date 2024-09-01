@@ -12,7 +12,8 @@ interface CustomizedButtonProps extends ButtonProps {
 }
 
 const CustomizedButton = styled(Button, {
-    shouldForwardProp: (prop: string) => prop !== "colorStyle",
+    shouldForwardProp: (prop: string) =>
+        prop !== "colorStyle" && prop !== "isLoading",
 })(({ colorStyle, isLoading }: CustomizedButtonProps) => {
     const theme = useTheme();
     const palette = theme.palette;
