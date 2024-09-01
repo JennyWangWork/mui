@@ -1,20 +1,15 @@
-import { TypographyProps, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
-import Button, { ButtonProps } from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-
-interface CustomizedButtonProps extends ButtonProps {
-    variant: ButtonProps["variant"];
-    colorStyle?: string;
-    isLoading?: boolean;
-}
+import { ButtonComponentProps, ButtonStyledProps } from "../types/button";
 
 const CustomizedButton = styled(Button, {
     shouldForwardProp: (prop: string) =>
         prop !== "colorStyle" && prop !== "isLoading",
-})(({ colorStyle, isLoading }: CustomizedButtonProps) => {
+})(({ colorStyle, isLoading }: ButtonStyledProps) => {
     const theme = useTheme();
     const palette = theme.palette;
     const selectedColorPalette = colorStyle
@@ -137,23 +132,7 @@ function CustomBtton({
     disabled,
     isLoading,
     loadingIconSize,
-}: {
-    variant: ButtonProps["variant"];
-    text?: string;
-    textStyle: TypographyProps["variant"];
-    colorStyle?: string;
-    backgroundColor?: string;
-    borderRadius?: string;
-    shadow?: number;
-    gap?: string;
-    startIcon?: string;
-    startIconSize?: number;
-    endIcon?: string;
-    endIconSize?: number;
-    disabled?: boolean;
-    isLoading?: boolean;
-    loadingIconSize?: number;
-}) {
+}: ButtonComponentProps) {
     const theme = useTheme();
 
     const CustomIcon = (icon?: string, iconSize?: number) => {
