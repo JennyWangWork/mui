@@ -2,6 +2,40 @@ import { createTheme, Theme } from "@mui/material/styles";
 // import "@mui/material/styles/createPalette";
 
 const customTheme: Theme = createTheme({
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    variants: [
+                        {
+                            props: { variant: "dashed" },
+                            style: {
+                                textTransform: "none",
+                                border: `2px solid red`,
+                                backgroundColor: "#EBEBEB",
+                                color: "#000000",
+                                borderRadius: "8px",
+                                "&:hover": {
+                                    backgroundColor: "#D6D6D6",
+                                    transition: "background-color 200ms ease",
+                                },
+                                "&:active": {
+                                    backgroundColor: "#C5C5C5",
+                                },
+                                "&:focus": {
+                                    outline: "2px solid #707BC2",
+                                },
+                                "&:disabled": {
+                                    backgroundColor: "#F5F5F5",
+                                    color: "#A9A9A9",
+                                },
+                            },
+                        },
+                    ],
+                },
+            },
+        },
+    },
     palette: {
         grey: {
             50: "#FFFFFF",

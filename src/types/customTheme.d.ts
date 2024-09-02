@@ -1,3 +1,4 @@
+import "@mui/material/Button";
 import "@mui/material/styles";
 import "@mui/material/styles/createPalette";
 
@@ -28,6 +29,12 @@ declare module "@mui/material/styles" {
             darkMask: string;
             background: string;
         };
+    }
+
+    declare module "@mui/material/Button" {
+        interface ButtonPropsVariantOverrides {
+            dashed: true;
+        }
     }
 
     // declare module "@mui/material/Button" {
