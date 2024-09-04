@@ -8,28 +8,52 @@ const customTheme: Theme = createTheme({
                 root: {
                     variants: [
                         {
-                            props: { variant: "dashed" },
-                            style: {
-                                textTransform: "none",
-                                border: `2px solid red`,
-                                backgroundColor: "#EBEBEB",
-                                color: "#000000",
-                                borderRadius: "8px",
-                                "&:hover": {
-                                    backgroundColor: "#D6D6D6",
-                                    transition: "background-color 200ms ease",
-                                },
-                                "&:active": {
-                                    backgroundColor: "#C5C5C5",
-                                },
-                                "&:focus": {
-                                    outline: "2px solid #707BC2",
-                                },
-                                "&:disabled": {
-                                    backgroundColor: "#F5F5F5",
-                                    color: "#A9A9A9",
-                                },
-                            },
+                            props: { variant: "greyContained" },
+                            // style: {
+                            //     textTransform: "none",
+                            //     border: `2px solid red`,
+                            //     backgroundColor: "#EBEBEB",
+                            //     color: "#000000",
+                            //     borderRadius: "8px",
+                            //     "&:hover": {
+                            //         backgroundColor: "#D6D6D6",
+                            //         transition: "background-color 200ms ease",
+                            //     },
+                            //     "&:active": {
+                            //         backgroundColor: "#C5C5C5",
+                            //     },
+                            //     "&:focus": {
+                            //         outline: "2px solid #707BC2",
+                            //     },
+                            //     "&:disabled": {
+                            //         backgroundColor: "#F5F5F5",
+                            //         color: "#A9A9A9",
+                            //     },
+                            // },
+                        },
+                        {
+                            props: { variant: "greyOutlined" },
+                            // style: {
+                            //     textTransform: "none",
+                            //     border: `2px solid red`,
+                            //     backgroundColor: "#EBEBEB",
+                            //     color: "#000000",
+                            //     borderRadius: "8px",
+                            //     "&:hover": {
+                            //         backgroundColor: "#D6D6D6",
+                            //         transition: "background-color 200ms ease",
+                            //     },
+                            //     "&:active": {
+                            //         backgroundColor: "#C5C5C5",
+                            //     },
+                            //     "&:focus": {
+                            //         outline: "2px solid #707BC2",
+                            //     },
+                            //     "&:disabled": {
+                            //         backgroundColor: "#F5F5F5",
+                            //         color: "#A9A9A9",
+                            //     },
+                            // },
                         },
                     ],
                 },

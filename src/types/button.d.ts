@@ -2,7 +2,6 @@ import { TypographyProps } from "@mui/material";
 import { ButtonProps } from "@mui/material/Button";
 
 interface ButtonStyledProps extends ButtonProps {
-    variant: ButtonProps["variant"];
     colorStyle?: string;
     isLoading?: boolean;
 }
@@ -14,13 +13,15 @@ interface ButtonComponentProps {
     colorStyle?: string;
     backgroundColor?: string;
     borderRadius?: string;
+    borderColor?: string;
     shadow?: number;
     gap?: string;
-    startIcon?: string;
-    startIconSize?: number;
-    endIcon?: string;
-    endIconSize?: number;
+    startIcon?: ReactNode;
+    // startIconSize?: number;
+    endIcon?: ReactNode;
+    // endIconSize?: number;
     disabled?: boolean;
     isLoading?: boolean;
     loadingIconSize?: number;
+    onClick?: () => void;
 }

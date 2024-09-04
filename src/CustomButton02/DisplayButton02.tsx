@@ -1,17 +1,11 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
 import "@mui/material/styles/createPalette";
 import CustomBtton from ".";
-import IconCopy from ".././assets/IconCopy.svg";
+import { ArrowUpwardComponent } from "../assets/arrowUpwardComponent";
+import { CopyIconComponent } from "../assets/CopyIconComponent";
+import { LinkIconComponent } from "../assets/LinkIconComponent";
 import customTheme from "../CustomPalette/customTheme";
-import IconLink from "../assets/IconLink.svg";
-import arrowUpward from "../assets/arrowUpward.svg";
-declare module "@mui/material/Button" {
-    interface ButtonPropsVariantOverrides {
-        dashed: true;
-    }
-}
 
 function DisplayBtton() {
     return (
@@ -45,22 +39,6 @@ function DisplayBtton() {
 
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="dashed"
-                        text="Text"
-                        textStyle="Body14"
-                        colorStyle="violet"
-                        borderRadius="8px"
-                        shadow={0}
-                        disabled={false}
-                        isLoading={false}
-                        loadingIconSize={24}
-                    />
-                </Box>
-
-                <Button variant="dashed"></Button>
-
-                <Box sx={{ width: "400px", height: "60px" }}>
-                    <CustomBtton
                         variant="text"
                         text="Text"
                         textStyle="Body14"
@@ -115,45 +93,24 @@ function DisplayBtton() {
                     />
                 </Box>
 
-                <Box sx={{ width: "298px", height: "40px" }}>
-                    <CustomBtton
-                        variant="outlined"
-                        text="Back"
-                        textStyle="Body16"
-                        colorStyle="grey"
-                        borderRadius="8px"
-                        disabled={false}
-                        isLoading={false}
-                        loadingIconSize={24}
-                    />
-                </Box>
-
-                <Box sx={{ width: "32px", height: "32px" }}>
-                    <CustomBtton
-                        variant="outlined"
-                        textStyle="Body14"
-                        colorStyle="violet"
-                        backgroundColor="violet.100"
-                        borderRadius="4px"
-                        startIcon={IconLink}
-                        startIconSize={24}
-                        disabled={false}
-                        isLoading={false}
-                        loadingIconSize={24}
-                    />
-                </Box>
-
                 <Box sx={{ width: "32px", height: "32px" }}>
                     <CustomBtton
                         variant="text"
                         textStyle="Body14"
                         colorStyle="violet"
                         backgroundColor="violet.100"
+                        borderColor="violet.400"
                         borderRadius="4px"
-                        startIcon={IconCopy}
-                        startIconSize={24}
+                        shadow={2}
+                        startIcon={
+                            <LinkIconComponent
+                                sx={{ width: "25.6px", height: "25.6px" }}
+                            />
+                        }
+                        // startIconSize={24}
                         disabled={false}
                         isLoading={false}
+                        onClick={() => console.log("click")}
                         loadingIconSize={24}
                     />
                 </Box>
@@ -206,8 +163,8 @@ function DisplayBtton() {
                         colorStyle="violet"
                         borderRadius="8px"
                         gap="2px"
-                        startIcon={arrowUpward}
-                        startIconSize={18}
+                        startIcon={<ArrowUpwardComponent />}
+                        // startIconSize={18}
                         shadow={2}
                         disabled={false}
                         isLoading={false}
@@ -224,6 +181,21 @@ function DisplayBtton() {
                         borderRadius="8px"
                         shadow={2}
                         disabled={true}
+                        isLoading={false}
+                        loadingIconSize={24}
+                    />
+                </Box>
+
+                <Box sx={{ width: "32px", height: "32px" }}>
+                    <CustomBtton
+                        variant="text"
+                        textStyle="Body14"
+                        colorStyle="violet"
+                        backgroundColor="violet.100"
+                        borderRadius="4px"
+                        startIcon={<CopyIconComponent />}
+                        // startIconSize={24}
+                        disabled={false}
                         isLoading={false}
                         loadingIconSize={24}
                     />
@@ -286,10 +258,9 @@ function DisplayBtton() {
 
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="contained"
+                        variant="greyOutlined"
                         text="Grey"
                         textStyle="Body14"
-                        colorStyle="grey"
                         borderRadius="8px"
                         shadow={2}
                         disabled={false}
@@ -300,10 +271,9 @@ function DisplayBtton() {
 
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="contained"
+                        variant="greyOutlined"
                         text="Grey"
                         textStyle="Body14"
-                        colorStyle="grey"
                         borderRadius="8px"
                         shadow={2}
                         disabled={true}
@@ -314,10 +284,9 @@ function DisplayBtton() {
 
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="contained"
+                        variant="greyOutlined"
                         text="Grey"
                         textStyle="Body14"
-                        colorStyle="grey"
                         borderRadius="8px"
                         disabled={false}
                         isLoading={true}
@@ -325,12 +294,23 @@ function DisplayBtton() {
                     />
                 </Box>
 
+                <Box sx={{ width: "298px", height: "40px" }}>
+                    <CustomBtton
+                        variant="greyOutlined"
+                        text="Back"
+                        textStyle="Body16"
+                        borderRadius="8px"
+                        disabled={false}
+                        isLoading={false}
+                        loadingIconSize={24}
+                    />
+                </Box>
+
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="outlined"
+                        variant="greyContained"
                         text="Grey"
                         textStyle="Body14"
-                        colorStyle="grey"
                         borderRadius="8px"
                         shadow={2}
                         disabled={false}
@@ -341,10 +321,9 @@ function DisplayBtton() {
 
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="outlined"
+                        variant="greyContained"
                         text="Grey"
                         textStyle="Body14"
-                        colorStyle="grey"
                         borderRadius="8px"
                         shadow={2}
                         disabled={true}
@@ -355,10 +334,9 @@ function DisplayBtton() {
 
                 <Box sx={{ width: "400px", height: "60px" }}>
                     <CustomBtton
-                        variant="outlined"
+                        variant="greyContained"
                         text="Grey"
                         textStyle="Body14"
-                        colorStyle="grey"
                         borderRadius="8px"
                         disabled={false}
                         isLoading={true}

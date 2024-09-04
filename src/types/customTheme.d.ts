@@ -31,12 +31,6 @@ declare module "@mui/material/styles" {
         };
     }
 
-    declare module "@mui/material/Button" {
-        interface ButtonPropsVariantOverrides {
-            dashed: true;
-        }
-    }
-
     // declare module "@mui/material/Button" {
     //     interface ButtonPropsColorOverrides {
     //         grey: true;

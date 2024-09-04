@@ -1,39 +1,31 @@
 import { useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { ButtonComponentProps, ButtonStyledProps } from "../types/button";
 
+declare module "@mui/material/Button" {
+    interface ButtonPropsVariantOverrides {
+        greyContained: true;
+        greyOutlined: true;
+    }
+}
+
 const CustomizedButton = styled(Button, {
     shouldForwardProp: (prop: string) =>
         prop !== "colorStyle" && prop !== "isLoading",
-})(({ colorStyle, isLoading }: ButtonStyledProps) => {
+})<ButtonStyledProps>(({ colorStyle, isLoading }) => {
     const theme = useTheme();
     const palette = theme.palette;
     const selectedColorPalette = colorStyle
         ? palette[colorStyle as keyof typeof palette]
-        : undefined;
+        : palette.grey;
     const colorDetails = selectedColorPalette as { [key: string]: string };
-    const isGrey = colorStyle === "grey";
-    const disabledOutlinedColor = isGrey
-        ? `${colorDetails["400"]}`
-        : `${colorDetails["300"]}`;
-    const loadingOutlinedBackgroundColor = isGrey
-        ? `${colorDetails["200"]}`
-        : `${colorDetails["100"]}`;
-    const loadingOutlinedBorderColor = isGrey
-        ? `${colorDetails["500"]}`
-        : `${colorDetails["700"]}`;
-    const loadingContainedColor = isGrey
-        ? `${colorDetails["700"]}`
-        : `${colorDetails["800"]}`;
 
     return {
         "&.MuiButton-text": {
             color: `${colorDetails["700"]}`,
-            borderColor: "none",
             "&:hover": {
                 outline: "none",
                 backgroundColor: `${colorDetails["100"]}`,
@@ -53,21 +45,15 @@ const CustomizedButton = styled(Button, {
 
         "&.MuiButton-outlined": {
             color: `${colorDetails["700"]}`,
-            borderColor: isGrey
-                ? `${colorDetails["500"]}`
-                : `${colorDetails["700"]}`,
+            border: `1px solid ${colorDetails["700"]}`,
             "&:hover": {
                 outline: "none",
-                backgroundColor: isGrey
-                    ? `${colorDetails["200"]}`
-                    : `${colorDetails["100"]}`,
+                backgroundColor: `${colorDetails["100"]}`,
                 transition: "background-color 200ms ease-out",
             },
             "&:active": {
                 outline: "none",
-                backgroundColor: isGrey
-                    ? `${colorDetails["200"]}`
-                    : `${colorDetails["100"]}`,
+                backgroundColor: `${colorDetails["100"]}`,
             },
             "&:focus": {
                 outline: "none",
@@ -75,42 +61,86 @@ const CustomizedButton = styled(Button, {
             "&:disabled": {
                 color: isLoading
                     ? `${colorDetails["700"]}`
-                    : disabledOutlinedColor,
-                backgroundColor: isLoading && loadingOutlinedBackgroundColor,
+                    : `${colorDetails["300"]}`,
+                backgroundColor: isLoading && `${colorDetails["100"]}`,
                 borderColor: isLoading
-                    ? loadingOutlinedBorderColor
+                    ? `${colorDetails["700"]}`
                     : `${colorDetails["300"]}`,
             },
         },
 
         "&.MuiButton-contained": {
-            color: isGrey ? `${colorDetails["900"]}` : `${palette.grey["50"]}`,
-            backgroundColor: isGrey
-                ? `${colorDetails["300"]}`
-                : `${colorDetails["700"]}`,
+            color: `${palette.grey["50"]}`,
+            backgroundColor: `${colorDetails["700"]}`,
+            border: "none",
             "&:hover": {
                 outline: "none",
-                backgroundColor: isGrey
-                    ? `${colorDetails["400"]}`
-                    : `${colorDetails["600"]}`,
+                backgroundColor: `${colorDetails["600"]}`,
                 transition: "background-color 200ms ease-out",
             },
             "&:active": {
                 outline: "none",
-                backgroundColor: isGrey
-                    ? `${colorDetails["500"]}`
-                    : `${colorDetails["700"]}`,
+                backgroundColor: `${colorDetails["800"]}`,
             },
             "&:focus": {
                 outline: "none",
             },
             "&:disabled": {
                 color: isLoading
-                    ? loadingContainedColor
+                    ? `${colorDetails["700"]}`
                     : `${palette.grey["50"]}`,
-                backgroundColor: isGrey
-                    ? `${colorDetails["300"]}`
-                    : `${colorDetails["200"]}`,
+                backgroundColor: `${colorDetails["200"]}`,
+            },
+        },
+
+        "&.MuiButton-greyOutlined": {
+            color: `${palette.grey["700"]}`,
+            border: `1px solid ${palette.grey["500"]}`,
+            "&:hover": {
+                outline: "none",
+                backgroundColor: `${palette.grey["200"]}`,
+                transition: "background-color 200ms ease-out",
+            },
+            "&:active": {
+                outline: "none",
+                backgroundColor: `${palette.grey["200"]}`,
+            },
+            "&:focus": {
+                outline: "none",
+            },
+            "&:disabled": {
+                color: isLoading
+                    ? `${palette.grey["700"]}`
+                    : `${palette.grey["300"]}`,
+                backgroundColor: isLoading && `${palette.grey["200"]}`,
+                borderColor: isLoading
+                    ? `${palette.grey["500"]}`
+                    : `${palette.grey["300"]}`,
+            },
+        },
+
+        "&.MuiButton-greyContained": {
+            color: `${palette.grey["900"]}`,
+            backgroundColor: `${palette.grey["300"]}`,
+            "&:hover": {
+                outline: "none",
+                backgroundColor: `${palette.grey["400"]}`,
+                transition: "background-color 200ms ease-out",
+            },
+            "&:active": {
+                outline: "none",
+                backgroundColor: `${palette.grey["500"]}`,
+            },
+            "&:focus": {
+                outline: "none",
+            },
+            "&:disabled": {
+                color: isLoading
+                    ? `${palette.grey["900"]}`
+                    : `${palette.grey["50"]}`,
+                backgroundColor: isLoading
+                    ? `${palette.grey["500"]}`
+                    : `${palette.grey["300"]}`,
             },
         },
     };
@@ -123,32 +153,18 @@ function CustomBtton({
     colorStyle,
     backgroundColor,
     borderRadius,
+    borderColor,
     shadow,
     gap,
     startIcon,
-    startIconSize,
+    // startIconSize,
     endIcon,
-    endIconSize,
+    // endIconSize,
     disabled,
     isLoading,
     loadingIconSize,
 }: ButtonComponentProps) {
     const theme = useTheme();
-
-    const CustomIcon = (icon?: string, iconSize?: number) => {
-        return (
-            <>
-                <Box
-                    component="img"
-                    sx={{
-                        width: iconSize,
-                        height: iconSize,
-                    }}
-                    src={icon}
-                />
-            </>
-        );
-    };
 
     return (
         <CustomizedButton
@@ -157,8 +173,8 @@ function CustomBtton({
             disableElevation={true}
             variant={variant}
             colorStyle={colorStyle}
-            startIcon={isLoading ? null : CustomIcon(startIcon, startIconSize)}
-            endIcon={isLoading ? null : CustomIcon(endIcon, endIconSize)}
+            startIcon={isLoading ? null : startIcon}
+            endIcon={isLoading ? null : endIcon}
             disabled={isLoading ? true : disabled}
             isLoading={isLoading}
             sx={{
@@ -167,10 +183,14 @@ function CustomBtton({
                 height: "100%",
                 textTransform: "none",
                 backgroundColor: backgroundColor,
+                borderWidth: borderColor ? "1px" : "none",
+                borderStyle: borderColor ? "solid" : "none",
+                borderColor: borderColor,
                 borderRadius: borderRadius,
                 boxShadow: shadow && theme.shadows[shadow],
                 "&:hover": {
                     boxShadow: shadow && theme.shadows[shadow],
+                    borderColor: borderColor,
                 },
                 "&:focus": {
                     boxShadow: shadow && theme.shadows[shadow],
