@@ -2,9 +2,9 @@ import Box from "@mui/material/Box";
 import { ThemeProvider } from "@mui/material/styles";
 import "@mui/material/styles/createPalette";
 import CustomBtton from ".";
-import { ArrowUpwardComponent } from "../assets/arrowUpwardComponent";
-import { CopyIconComponent } from "../assets/CopyIconComponent";
-import { LinkIconComponent } from "../assets/LinkIconComponent";
+import { ArrowUpwardIcon } from "../assets/ArrowUpwardIcon";
+import { CopyIcon } from "../assets/CopyIcon";
+import { LinkIcon } from "../assets/LinkIcon";
 import customTheme from "../CustomPalette/customTheme";
 
 function DisplayBtton() {
@@ -103,7 +103,7 @@ function DisplayBtton() {
                         borderRadius="4px"
                         shadow={2}
                         startIcon={
-                            <LinkIconComponent
+                            <LinkIcon
                                 sx={{ width: "25.6px", height: "25.6px" }}
                             />
                         }
@@ -163,7 +163,7 @@ function DisplayBtton() {
                         colorStyle="violet"
                         borderRadius="8px"
                         gap="2px"
-                        startIcon={<ArrowUpwardComponent />}
+                        startIcon={<ArrowUpwardIcon />}
                         // startIconSize={18}
                         shadow={2}
                         disabled={false}
@@ -193,7 +193,7 @@ function DisplayBtton() {
                         colorStyle="violet"
                         backgroundColor="violet.100"
                         borderRadius="4px"
-                        startIcon={<CopyIconComponent />}
+                        startIcon={<CopyIcon />}
                         // startIconSize={24}
                         disabled={false}
                         isLoading={false}

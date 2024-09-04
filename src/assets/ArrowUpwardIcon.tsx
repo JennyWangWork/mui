@@ -1,6 +1,6 @@
 import { createSvgIcon } from "@mui/material/utils";
 
-export const ArrowUpwardComponent = createSvgIcon(
+export const ArrowUpwardIcon = createSvgIcon(
     <svg
         width="20"
         height="20"

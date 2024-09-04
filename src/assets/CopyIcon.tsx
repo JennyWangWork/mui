@@ -1,6 +1,6 @@
 import { createSvgIcon } from "@mui/material/utils";
 
-export const CopyIconComponent = createSvgIcon(
+export const CopyIcon = createSvgIcon(
     <svg
         width="32"
         height="33"
