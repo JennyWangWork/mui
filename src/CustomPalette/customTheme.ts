@@ -55,6 +55,12 @@ const customTheme: Theme = createTheme({
                             //     },
                             // },
                         },
+                        {
+                            props: { variant: "signUpOutlined" },
+                        },
+                        {
+                            props: { variant: "signInContained" },
+                        },
                     ],
                 },
             },
