@@ -1,15 +1,17 @@
-import "@mui/material/Button";
 import "@mui/material/styles";
 import "@mui/material/styles/createPalette";
+import { SxProps, Theme } from "@mui/system";
+
+type TypeSX = SxProps<Theme>;
 
 declare module "@mui/material/styles" {
     interface Palette {
-        grey: Palette["primary"];
-        violet: Palette["primary"];
-        yellow: Palette["primary"];
-        cyan: Palette["primary"];
-        magenta: Palette["primary"];
-        teal: Palette["primary"];
+        grey: Palette["grey"];
+        violet: Palette["grey"];
+        yellow: Palette["grey"];
+        cyan: Palette["grey"];
+        magenta: Palette["grey"];
+        teal: Palette["grey"];
         functional: {
             lightMask: string;
             darkMask: string;
@@ -18,29 +20,18 @@ declare module "@mui/material/styles" {
     }
 
     interface PaletteOptions {
-        grey?: PaletteOptions["primary"];
-        violet?: PaletteOptions["primary"];
-        yellow?: PaletteOptions["primary"];
-        cyan?: PaletteOptions["primary"];
-        magenta?: PaletteOptions["primary"];
-        teal?: PaletteOptions["primary"];
+        grey?: PaletteOptions["grey"];
+        violet?: PaletteOptions["grey"];
+        yellow?: PaletteOptions["grey"];
+        cyan?: PaletteOptions["grey"];
+        magenta?: PaletteOptions["grey"];
+        teal?: PaletteOptions["grey"];
         functional?: {
             lightMask: string;
             darkMask: string;
             background: string;
         };
     }
-
-    // declare module "@mui/material/Button" {
-    //     interface ButtonPropsColorOverrides {
-    //         grey: true;
-    //         violet: true;
-    //         yellow: true;
-    //         cyan: true;
-    //         magenta: true;
-    //         teal: true;
-    //     }
-    // }
 
     interface TypographyVariants {
         B42: React.CSSProperties;

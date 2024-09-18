@@ -4,6 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import { PaletteOptions } from "@mui/material/styles/createPalette";
 import { ReactNode } from "react";
+import { TypeSX } from "../types/customTheme";
 
 declare module "@mui/material/Button" {
     interface ButtonPropsVariantOverrides {
@@ -22,8 +23,6 @@ interface ButtonStyledProps extends ButtonProps {
 
 interface ButtonComponentProps {
     variant: ButtonProps["variant"];
-    width?: string;
-    height?: string;
     children?: React.ReactNode;
     colorStyle?: keyof PaletteOptions;
     shadow?: number;
@@ -33,7 +32,7 @@ interface ButtonComponentProps {
     disabled?: boolean;
     isLoading?: boolean;
     loadingIconSize?: number;
-    sx?: object;
+    sx?: TypeSX;
     onClick?: () => void;
 }
 
@@ -232,8 +231,6 @@ const CustomizedButton = styled(Button, {
 
 function ButtonComponent({
     variant,
-    width,
-    height,
     colorStyle,
     children,
     shadow,
@@ -261,9 +258,9 @@ function ButtonComponent({
             isLoading={isLoading}
             onClick={onClick}
             sx={{
-                width: width ? width : "100%",
+                width: "100%",
                 minWidth: "0",
-                height: height ? height : "100%",
+                height: "100%",
                 textTransform: "none",
                 ...sx,
                 boxShadow: shadow && theme.shadows[shadow],
