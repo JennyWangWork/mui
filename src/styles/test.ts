@@ -35,3 +35,71 @@ const TalkNameText = styled(Typography)<{ theme: Theme }>`
     display: -webkit-box;
     -webkit-line-clamp: 2;
 `;
+
+const TalkStatusBox = styled(Box, {
+    shouldForwardProp: (prop) => prop !== "status",
+})<{
+    theme: Theme;
+    status: string;
+}>(({ theme, status }) => {
+    let color;
+    let backgroundColor;
+
+    switch (status) {
+        case "draft":
+            color = theme.palette.cyan[700];
+            backgroundColor = theme.palette.cyan[100];
+            break;
+        case "published":
+            color = theme.palette.teal[700];
+            backgroundColor = theme.palette.teal[100];
+            break;
+        case "closed":
+            color = theme.palette.magenta[700];
+            backgroundColor = theme.palette.magenta[100];
+            break;
+    }
+
+    return {
+        width: "fit-content",
+        height: "24px",
+        color: color,
+        backgroundColor: backgroundColor,
+        borderRadius: "4px",
+        padding: "4px 8px",
+    };
+});
+
+const TalkStatusBox = styled(Box)<{ theme: Theme; status: string }>(
+    ({ theme, status }) => {
+        let color;
+        let backgroundColor;
+
+        switch (status) {
+            case "draft":
+                color = theme.palette.cyan[700];
+                backgroundColor = theme.palette.cyan[100];
+                break;
+            case "published":
+                color = theme.palette.teal[700];
+                backgroundColor = theme.palette.teal[100];
+                break;
+            case "closed":
+                color = theme.palette.magenta[700];
+                backgroundColor = theme.palette.magenta[100];
+                break;
+            default:
+                color = theme.palette.text.primary;
+                backgroundColor = theme.palette.grey[200]; // Default case, if needed
+        }
+
+        return {
+            width: "fit-content",
+            height: "24px",
+            color,
+            backgroundColor,
+            borderRadius: "4px",
+            padding: "4px 8px",
+        };
+    }
+);
